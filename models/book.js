@@ -5,10 +5,28 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     rating: DataTypes.FLOAT,
   }, {});
-
-  Book.generate = (author, bookId, name, rating) => Book.create({
+  const addBooks = (author, bookId, name, rating) => Book.create({
     author, bookId, name, rating,
-  }); // POST
+  }).then;
+
+  Book.generate = (author, bookId, name, rating) => {
+    // const currentBookId = bookId;
+    // Book.getOneBook = id => Book.findOne({
+    //   where: {
+    //     bookId: id,
+    //   },
+    // }).then(null, addBooks(author, bookId, name, rating));
+    // Book.getOneBook(currentBookId);
+    Book.findOrCreate({
+      where: {
+        author,
+        bookId,
+        name,
+        rating,
+      },
+    });
+  };
+
 
   return Book;
 };

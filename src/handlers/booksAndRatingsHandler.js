@@ -25,6 +25,7 @@ const booksAndRatingsHandler = async (request, h) => {
     const name = bookData[index].Name;
     const rating = bookRatingsCollection[index].rating;
     // };
+
     books[index] = model.Book.generate(author, id, name, rating);
   }
   const bookDetails = await Promise.all(books);
