@@ -4,19 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     bookId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     rating: DataTypes.FLOAT,
+    likeStatus: DataTypes.STRING,
   }, {});
-  const addBooks = (author, bookId, name, rating) => Book.create({
-    author, bookId, name, rating,
-  }).then;
 
-  Book.generate = (author, bookId, name, rating) => {
-    // const currentBookId = bookId;
-    // Book.getOneBook = id => Book.findOne({
-    //   where: {
-    //     bookId: id,
-    //   },
-    // }).then(null, addBooks(author, bookId, name, rating));
-    // Book.getOneBook(currentBookId);
+  Book.generate = (author, bookId, name, rating, likeStatus) => {
     Book.findOrCreate({
       where: {
         author,
@@ -24,6 +15,15 @@ module.exports = (sequelize, DataTypes) => {
         name,
         rating,
       },
+    }).then((response) => {
+      // console.log(response);
+      Book.update({
+        likeStatus,
+      }, {
+        where: {
+          bookId,
+        },
+      });
     });
   };
 

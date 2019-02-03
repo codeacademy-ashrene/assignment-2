@@ -13,6 +13,7 @@ const authorAndRatingHandler = async (request, h) => {
   //   const ratingData = makeGetRequest(book.id);
   //   return ratingData;
   // });
+  console.log(bookRatings);
   const bookRatingsCollection = await Promise.all(bookRatings);
 
   // const authorAndRatingData = bookData.forEach(book => ({
